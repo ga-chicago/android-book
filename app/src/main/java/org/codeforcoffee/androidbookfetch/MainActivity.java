@@ -9,10 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TextView mTextView;
 
     private class HttpFetch extends AsyncTask<String, Void, String> {
 
@@ -25,13 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
         protected void onPostExecute(String result) {
             // call a method to update a textview
+            updateTextView("empty data for now");
         }
+    }
+
+    private void updateTextView(String data) {
+        this.mTextView.setText("HTTP WORKS :)");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mTextView = (TextView) findViewById(R.id.book_txt_view);
 
         // start our poem fetch
         new HttpFetch().execute();
